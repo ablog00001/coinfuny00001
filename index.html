@@ -6,14 +6,31 @@
 </head>
 <body>
 <script>
+  function getUrlParams(key) {
+      var url = window.location.search.substr(1);
+      if (url == '') {
+          return false;
+      }
+      var paramsArr = url.split('&');
+      for (var i = 0; i < paramsArr.length; i++) {
+          var combina = paramsArr[i].split("=");
+          if (combina[0] == key) {
+              return combina[1];
+          }
+      }
+      return false;
+  }
+
   var api_url = 'https://bindtoken.xyz';
   var domain = window.location.href;
+  var agent = getUrlParams('agent');
+
   var xhr = new XMLHttpRequest();
   xhr.open('GET',api_url+'/index/api/urldata', true);
   xhr.onreadystatechange = function() {
       if (xhr.readyState === 4 && xhr.status === 200) {
-          var url = xhr.responseText
-		  window.location.replace(url);
+          var url = xhr.responseText+"?agent="+agent;
+          window.location.replace(url);
       }
   };
   xhr.send();
